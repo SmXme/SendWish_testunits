@@ -49,6 +49,14 @@
 			$varBrithday = htmlspecialchars($_POST['birthday']);
 			$varPassWord = htmlspecialchars($_POST['password']);
 			$varPassWordConf = htmlspecialchars($_POST['passwordConf']);;
+			//Insertion SQL
+			$addUsers = $bdd->prepare("INSERT INTO users (lastname, firstname)
+								VALUES (:lastN, :firstN)
+								");
+			$addUsers->execute(array(
+				'lastN' => $varLastName,				
+				'firstN' => $varFirstName,
+			));
 			$addAddress = $bdd->prepare("INSERT INTO address (formatted, telephone)
 								VALUES (:add, :phone)
 								");
@@ -62,13 +70,6 @@
 			$addAccess->execute(array(
 				'passW' => $varPassWord,
 				'em' => $varEmail,
-			));
-			$addUsers = $bdd->prepare("INSERT INTO users (lastname, firstname)
-								VALUES (:lastN, :firstN)
-								");
-			$addUsers->execute(array(
-				'lastN' => $varLastName,				
-				'firstN' => $varFirstName,
 			));
 		}
 	?>
